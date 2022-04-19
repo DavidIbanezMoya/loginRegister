@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script type="text/javascript">
+        let users = {pepe : {password : "123", mail : "pepe@gmail.com"}, lola : {password : "456", mail : "lola@gmail.com"}};
+        function fer_login() {
+            console.log("Dins de la funcio");
+            let userEl = document.getElementById("userL");
+            let passEl = document.getElementById("passL");
+
+            if (users[userEl.value] == passEl.value) {
+                alert("Logged succesfully as "+userEl.value)
+            }
+            else{
+                alert("Failed")
+                
+            }
+        }
+        // S ha de afegir dades al diccionari amb un push, pero primer comprovar
+        //que el camp usuari/contrasenya no estigui ja en el diccionari.
+        //No es pot repetir ni nom ni correu
+        function registra() {
+            console.log("Dins de la funcio registre");
+            let userEl = document.getElementById("userR");
+            let passEl = document.getElementById("passR");
+            let passEl2 = document.getElementById("passR2");
+            let emailEl = document.getElementById("emailR");
+            let esta = false;
+            if (passEl.value != passEl2.value) {
+                alert("Passwords doesn't match")
+            } 
+            else
+                for (let i in users) {
+                    if (userEl.value == i){
+                         esta = true;
+                }
+                }
+                if (esta == true){
+                    alert("This user is already registered")
+                }
+                for (let i in users){
+                    //Revisar esta parte
+                    if(i.mail == emailEl.value)
+                    esta == true
+                }
+                if (esta==false){
+                    users.push({key:userEl.value,value:passEl.value,value:emailEl.value})
+                }
+                else
+                    alert("This email is already used")
+        }
+    </script>
+</head>
+<body>
+<form style="background-color: lightgray;">
+    <h3>Login</h3>
+    <label>Name: </label>
+    <br>
+    <input type="text" name="username" id="userL">
+    <br>
+    <label>Password: </label>
+    <br>
+    <input type="Password" name="password" id="passL">
+    <br>
+    <input type="Button" name="Submit" value="login" onclick="fer_login()">
+</form>
+
+
+<form style="background-color: lightblue;">
+    <h3>Register</h3>
+    <label>Name: </label>
+    <br>
+    <input type="text" name="username" id="userR">
+    <br>
+    <label>Email: </label>
+    <br>
+    <input type="Email" name="email" id="emailR">
+    <br>
+    <label>Password: </label>
+    <br>
+    <input type="Password" name="password" id="passR">
+    <br>
+    <label>Your Password Again: </label>
+    <br>
+    <input type="Password" name="password" id="passR2">
+    <br>
+    <input type="Button" name="Submit" value="register" onclick="registra()" >
+</form>
+
+
+</body>
+</html>
