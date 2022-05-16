@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <script type="text/javascript">
-        let users = {pepe : {password : "123", mail : "pepe@gmail.com"}, lola : {password : "456", mail : "lola@gmail.com"}};
+        let users = {pepe : {username : "pepe", password : "123", mail : "pepe@gmail.com"}, lola : {username : "lola", password : "456", mail : "lola@gmail.com"}};
+        //let users = {{username: "pepe", password : "123", mail : "pepe@gmail.com"},  {username: "lola", password : "456", mail : "lola@gmail.com"}};
+
         function fer_login() {
             console.log("Dins de la funcio");
             let userEl = document.getElementById("userL");
             let passEl = document.getElementById("passL");
 
-            if (users[userEl.value] == passEl.value) {
+            if (users[userEl.value].password == passEl.value) {
                 alert("Logged succesfully as "+userEl.value)
             }
             else{
@@ -30,10 +32,12 @@
             let passEl2 = document.getElementById("passR2");
             let emailEl = document.getElementById("emailR");
             let esta = false;
+            let mail = false
             if (passEl.value != passEl2.value) {
                 alert("Passwords doesn't match")
             } 
             else
+            //Revisa que no es repeteixi l usuari
                 for (let i in users) {
                     if (userEl.value == i){
                          esta = true;
@@ -42,13 +46,16 @@
                 if (esta == true){
                     alert("This user is already registered")
                 }
+                //Revisa que no es repeteixi el correu
                 for (let i in users){
-                    //Revisar esta parte
-                    if(i.mail == emailEl.value)
-                    esta == true
+                    if(users[i].mail == emailEl.value)
+                        mail = true
                 }
-                if (esta==false){
-                    users.push({key:userEl.value,value:passEl.value,value:emailEl.value})
+                if (mail==false){
+                    newUser = {username : userEl.value, password : passEl.value, mail : emailEl.value};
+                    users[userEl.value] = newUser;
+                    alert("User registered")
+                    console.log(users)
                 }
                 else
                     alert("This email is already used")
